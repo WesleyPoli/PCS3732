@@ -42,13 +42,18 @@
 //                         -> * (fatorial, so precisa de A)
 // =====================================================================
 
-#include "Keypad.hpp"
-#include <wiringPiI2C.h>
-#include <wiringPi.h>
+// IMPORTANTE: os headers da STL (<iostream>, <string>, <vector>) precisam
+// vir ANTES de "Keypad.hpp". O Key.hpp do Freenove faz `#define byte
+// unsigned char`, e essa macro quebra o tipo std::byte do C++14 se entrar
+// antes dos headers padrao. Incluindo a STL primeiro, std::byte ja esta
+// definido; depois a macro `byte` fica disponivel para os arrays de pinos.
 #include <iostream>
 #include <string>
 #include <vector>
 #include <cstdint>
+#include <wiringPiI2C.h>
+#include <wiringPi.h>
+#include "Keypad.hpp"
 
 // =====================================================================
 //  BitNumber - inteiro de largura parametrizavel; bits[0] = LSB
